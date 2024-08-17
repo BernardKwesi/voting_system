@@ -96,6 +96,8 @@ class VotersController extends Controller
             return redirect()->back()->with(["message" => "No election found"]);
         }
 
+
+
         // Get the current time
         $currentTime = now(); // You can use Carbon::now() if you prefer
 
@@ -106,6 +108,16 @@ class VotersController extends Controller
 
         // Check if the voter has already voted
         $voter_id = $request->voter_id;
+
+        //check if the voter id is valid
+        $validVoter = Voters::where('voter_id', $voter_id)
+                            ->where("election_id", 1)
+                            ->exists();
+
+        if (!$validVoter) {
+            return redirect()->back()->with(["message" => "Invalid code entered"]);
+        }
+
         $hasVoted = \App\Models\Results::where('voter_id', $voter_id)
                                        ->where("election_id", $election->id)
                                        ->exists();

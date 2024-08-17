@@ -152,7 +152,7 @@
                                 <div class="content">
 
                                     <h4 class="title text-center">{{ $candidate->name }}</h4>
-                                    <p>{{ $candidate->motto }}</p>
+                                    <p class="text-center">{{ $candidate->motto }}</p>
                                     <div class="btn-wrapper vote-btn d-flex justify-content-center">
                                         <span  class="boxed-btn btn-sanatory" style="border:none;">
                                             SELECT
