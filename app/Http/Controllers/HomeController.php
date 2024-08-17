@@ -48,7 +48,7 @@ class HomeController extends Controller
     }
 
     public function results(){
-        $election = Election::where("status",1)->first();
+        $election = Election::where("id",1)->first();
 
         $positions = $election->positions;
         $positionData = [];
