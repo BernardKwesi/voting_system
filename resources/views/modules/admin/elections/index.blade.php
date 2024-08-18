@@ -108,12 +108,12 @@
 
     buttons: [{
             extend: 'print',
-            title : 'Waitlist',
+            title : 'Results',
             attr: {
                 class: "btn btn-sm btn-secondary"
             },
             exportOptions: {
-                columns: [0, 1, 2, ]
+                columns: [0, 1, 2 ]
             }
         },
         {

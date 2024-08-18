@@ -119,33 +119,33 @@
 
     buttons: [{
             extend: 'print',
-            title : 'Waitlist',
+            title : 'Results',
             attr: {
                 class: "btn btn-sm btn-secondary"
             },
             exportOptions: {
-                columns: [0, 1, 2, 3,4,5,6,7]
+                columns: [0, 1, 2]
             }
         },
         {
             extend: 'excel',
-            title : 'Waitlist',
+            title : 'Results',
             attr: {
                 class: "btn btn-sm btn-success rounded-right ",
                 style: "margin-right:5px; margin-left:5px;"
             },
             exportOptions: {
-                columns: [0, 1, 2, 3,4,5,6,7]
+                columns: [0, 1, 2]
             }
         },
         {
             extend: 'pdf',
-            title : 'Waitlist',
+            title : 'Results',
             attr: {
                 class: "btn btn-sm btn-info rounded-right"
             },
             exportOptions: {
-                columns: [0, 1, 2, 3,4,5,6,7]
+                columns: [0, 1, 2]
             }
         },
         {
