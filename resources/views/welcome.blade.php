@@ -39,7 +39,7 @@
                                     </div>
                                     @if(session('message'))
                                         <div class="alert alert-{{ session('alert-class', 'danger') }} alert-dismissible fade show" role="alert">
-                                            {{ session('message') }}
+                                            {{ strtoupper(session('message'))  }}
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
 

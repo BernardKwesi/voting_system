@@ -1,33 +1,56 @@
-<div class="modal fade" id="updateCategoryModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="updateElectionModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Add Category</h5>
+          <h5 class="modal-title">Edit Election</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="editCategoryForm">
+        <form id="editElectionForm">
             @csrf
+            <input type="hidden" name="id" id="edit-election-id">
             <div class="modal-body">
-                <input type="hidden" name="id" id="update-category-id">
                 <div class="row mt-2">
                     <div class="col">
-                        <label for="">Description<span style="color:red">*</span></label>
-                        <input type="text" name="description" required class="form-control" id="update-category-name" required>
+                        <label for="">Name<span style="color:red">*</span></label>
+                        <input type="text" name="name"  class="form-control" required id="edit-election-name">
                     </div>
                 </div>
 
                 <div class="row mt-2">
                     <div class="col">
-                        <label for="">Order<span style="color:red">*</span></label>
-                        <input type="number" name="order" required class="form-control" id="update-category-order" required>
+                        <label for="">Start Date -Time<span style="color:red">*</span></label>
+                        <input type="datetime-local" name="start" class="form-control" required id="edit-election-start">
                     </div>
                 </div>
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <label for="">End Date -Time<span style="color:red">*</span></label>
+                        <input type="datetime-local" name="end" class="form-control" required id="edit-election-end">
+                    </div>
+                </div>
+
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <label for="">Status<span style="color:red">*</span></label>
+                       <select name="status" class="form-control " id="edit-election-status" required>
+                        <option value="">--select--</option>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                       </select>
+                    </div>
+                </div>
+
+
+
 
             </div>
+
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="editCategoryForm" class="btn btn-primary">Save changes</button>
+                <button type="submit" form="editElectionForm" class="btn btn-primary">Save changes</button>
 
             </div>
         </form>
@@ -38,17 +61,17 @@
   </div>
 
   <script>
-    const editCategoryForm = document.forms["editCategoryForm"];
+    const editElectionForm = document.forms["editElectionForm"];
 
-    $(editCategoryForm).submit(function(e) {
+    $(editElectionForm).submit(function(e) {
         e.preventDefault();
 
-        var formdata = new FormData(editCategoryForm)
+        var formdata = new FormData(editElectionForm)
         formdata.append("createuser", CREATEUSER);
 
         Swal.fire({
             title: '',
-            text: "Are you sure you want to update category?",
+            text: "Are you sure you want to update ?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -58,12 +81,12 @@
 
             if (result.value) {
                 Swal.fire({
-                    text: "Updating category...",
+                    text: "Updating ...",
                     showConfirmButton: false,
                     allowEscapeKey: false,
                     allowOutsideClick: false
                 });
-                fetch(`${APP_URL}/api/categories/update`, {
+                fetch(`${APP_URL}/api/elections/update`, {
                     method: "POST",
                     body: formdata,
                 }).then(function(res) {
@@ -78,13 +101,13 @@
                     }
 
                     Swal.fire({
-                        text: "Category Updated Successfully",
+                        text: " Updated Successfully",
                         icon: "success"
                     });
-                    $("#updateCategoryModal").modal('hide');
-                    categoryTable.ajax.reload(false, null);
+                    $("#updateElectionModal").modal('hide');
+                    electionsTable.ajax.reload(false, null);
 
-                    editCategoryForm.reset();
+                    editElectionForm.reset();
 
                 }).catch(function(err) {
                 console.log(err)

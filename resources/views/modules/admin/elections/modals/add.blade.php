@@ -33,7 +33,7 @@
                 <div class="row mt-2">
                     <div class="col">
                         <label for="">Status<span style="color:red">*</span></label>
-                       <select name="status" id="" class="form-control ">
+                       <select name="status" id="" class="form-control " required>
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                        </select>

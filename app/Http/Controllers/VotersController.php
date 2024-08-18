@@ -93,7 +93,7 @@ class VotersController extends Controller
 
         // Check if there is an election
         if (!$election) {
-            return redirect()->back()->with(["message" => "No election found"]);
+            return redirect()->back()->with(["message" => "The election has been closed"]);
         }
 
 
@@ -101,6 +101,9 @@ class VotersController extends Controller
         // Get the current time
         $currentTime = now(); // You can use Carbon::now() if you prefer
 
+        if($currentTime->lessThan($election->start_date) ){
+            return redirect()->back()->with(["message" => "The election has yet started!!!!"]);
+        }
         // Check if the current time has passed the end_date of the election
         if ($currentTime->greaterThan($election->end_date) || $election->status == 0) {
             return redirect()->back()->with(["message" => "The election has been closed"]);

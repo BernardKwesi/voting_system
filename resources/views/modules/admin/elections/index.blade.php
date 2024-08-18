@@ -87,7 +87,10 @@
 
                 var html = '';
 
-
+                html += `<button type='button' data-row-transid='$this->transid'
+                                            rel='tooltip' class='btn btn-warning btn-sm edit-btn m-2'>
+                                               <i class='fas fa-edit'></i> Edit
+                                            </button>`
 
                     html += `<button type='button' data-row-transid='$this->transid'
                                             rel='tooltip' class='btn btn-danger btn-sm delete-btn'>
@@ -110,7 +113,7 @@
                 class: "btn btn-sm btn-secondary"
             },
             exportOptions: {
-                columns: [0, 1, 2, 3,4,5,6,7]
+                columns: [0, 1, 2, ]
             }
         },
         {
@@ -148,15 +151,17 @@
 });
 
 
-$("#category-table").on("click", ".edit-btn", function() {
-            let data = categoryTable.row($(this).parents('tr')).data();
+$("#elections-table").on("click", ".edit-btn", function() {
+            let data = electionsTable.row($(this).parents('tr')).data();
 
 
-            $("#updateCategoryModal").modal("show");
+            $("#updateElectionModal").modal("show");
 
-            $("#update-category-id").val(data.id);
-            $("#update-category-name").val(data.name);
-            $("#update-category-order").val(data.order);
+            $("#edit-election-id").val(data.id);
+            $("#edit-election-start").val(data.start_date);
+            $("#edit-election-end").val(data.end_date);
+            $("#edit-election-name").val(data.name);
+            $("#edit-election-status").val(data.status).trigger('change');
 
         });
 
