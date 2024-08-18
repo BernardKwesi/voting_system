@@ -101,13 +101,13 @@ class VotersController extends Controller
         // Get the current time
         $currentTime = now(); // You can use Carbon::now() if you prefer
 
-        // if($currentTime->lessThan($election->start_date) ){
-        //     return redirect()->back()->with(["message" => "The election has yet started!!!!"]);
-        // }
+        if($currentTime->lessThan($election->start_date) ){
+            return redirect()->back()->with(["message" => "The election has yet started!!!!"]);
+        }
         // // Check if the current time has passed the end_date of the election
-        // if ($currentTime->greaterThan($election->end_date) || $election->status == 0) {
-        //     return redirect()->back()->with(["message" => "The election has been closed"]);
-        // }
+        if ($currentTime->greaterThan($election->end_date) || $election->status == 0) {
+            return redirect()->back()->with(["message" => "The election has been closed"]);
+        }
 
         // Check if the voter has already voted
         $voter_id = $request->voter_id;
@@ -117,17 +117,17 @@ class VotersController extends Controller
                             ->where("election_id", 1)
                             ->exists();
 
-        // if (!$validVoter) {
-        //     return redirect()->back()->with(["message" => "Invalid code entered"]);
-        // }
+        if (!$validVoter) {
+            return redirect()->back()->with(["message" => "Invalid code entered"]);
+        }
 
         $hasVoted = \App\Models\Results::where('voter_id', $voter_id)
                                        ->where("election_id", $election->id)
                                        ->exists();
 
-        // if ($hasVoted) {
-        //     return redirect()->back()->with(["message" => "You have already voted"]);
-        // }
+        if ($hasVoted) {
+            return redirect()->back()->with(["message" => "You have already voted"]);
+        }
 
         // Prepare positions for the view
         $positions = [];
